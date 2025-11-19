@@ -2,7 +2,7 @@
 Coding and Cryptography tasks
 
 # Image Compression and File Format Analysis
-Includes hands-on exercises for BMP, PNG, and JPEG formats, covering both lossless and lossy methods. Students explore headers, pixel data, palettes, filters, chroma subsampling, DCT, and zig-zag scanning.
+Includes tasks for BMP, PNG, and JPEG formats, covering both lossless and lossy methods. Students explore headers, pixel data, palettes, filters, chroma subsampling, DCT, and zig-zag scanning.
 
 ## Table of Contents
 
@@ -16,10 +16,9 @@ Includes hands-on exercises for BMP, PNG, and JPEG formats, covering both lossle
 8. [References](#references)  
 
 ## Project Overview
-The goal of this project is to understand **how different image formats store pixel data, how compression works, and how visual artifacts arise** from lossy compression.
+No overview, just needed to get the homework done. 😭 Sorry for the delay professor.
 
-Key concepts explored:
-
+Tasks summarized:
 - File headers and pixel storage (BMP)
 - Palette/indexed color and PNG filtering (PNG)
 - Luma/chroma separation and chroma subsampling (JPEG)
@@ -27,6 +26,5 @@ Key concepts explored:
 
 ## Requirements
 Install the necessary Python libraries:
-
 ```bash
 pip install pillow numpy matplotlib scipy
