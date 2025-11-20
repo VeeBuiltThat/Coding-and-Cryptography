@@ -28,7 +28,7 @@ def introduce_error(codeword, error_position):
     Flips one bit at error_position to simulate transmission errors.
     """
     received_codeword = codeword.copy()
-    received_codeword[error_position] = 1 - received_codeword[error_position]  # bit flip
+    received_codeword[error_position] = 1 - received_codeword[error_position] 
     return received_codeword
 
 
