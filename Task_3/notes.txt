@@ -1,0 +1,19 @@
+Task 3.1 (basic red-channel, keys as printed tuple strings)  
+stega_encrypt writes each character code into the red channel of a randomly chosen pixel and writes the chosen coordinates to keys.txt using Python's str(key) (format "(x, y)" per line). stega_decrypt reads that file, parses coordinates via regex, reads the red channel values and reconstructs the message. Usage: run the encrypt script, supply an image path and message; run decrypt and provide image + keys file.
+
+Task 3.2 (blue-channel, different key formatting)  
+stega_encrypt_blue stores character codes in the blue channel and writes keys using str(key) lines. stega_decrypt_blue reads the keys file as a Python-list-like string, uses regex to extract x,y pairs, reads blue channel values and reconstructs the message.
+
+Task 3.3 (red-channel, keys written as "x,y")  
+stega_encrypt_xy writes char codes into the red channel and writes keys as plain "x,y" lines (no parentheses). stega_decrypt_xy reads that file, splits each "x,y" line to ints, and recovers red-channel codes.
+
+Task 3.4 (delimiter termination)  
+Similar to Task 3.1 but appends a delimiter byte (DELIMITER = chr(0)) to the message before writing keys. stega_decrypt_delim reads coordinates and stops when the red-channel value equals 0 (used as terminator) so keys file can be shorter/unknown length.
+Common implementation notes and caveats
+
+All encryptors call img.convert("RGB") and save as PNG (to avoid lossy compression altering pixel values).  
+Keys are generated with random coordinates; the code does not check for duplicates, so later writes can overwrite earlier characters if the same coordinate is picked twice.  
+Different scripts use different key-file formats: some write str(key) (parentheses), some "x,y". Make sure to use the matching decryptor for the encryptor you ran.  
+The delimiters approach uses value 0 as a terminator - it assumes your message will not include a NUL character or that you intentionally use NUL as a terminator.  
+Decryptors rely on reading exact byte values from the channel; compressing/saving as JPEG or re-encoding the image may corrupt data - use PNG.
+

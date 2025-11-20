@@ -1,0 +1,154 @@
+BMP.py 
+purpose
+ this code makes a bmp image file.
+ the image is 256 by 256 pixels.
+ each pixel uses 8 bits.
+ 8 bits means the pixel uses a value from 0 to 255.
+ this value is used for gray color.
+setup numbers
+ padding size = extra bytes at the end of each row to fit bmp rules
+ image size = how many bytes the picture data takes
+ palette size = 256 colors times 4 bytes per color
+ file offset = where pixel data starts in the file
+ file size = total size of the bmp file
+file header
+ writes letters B and M
+ writes file size
+ writes two zero values
+ writes where pixel data starts
+info header
+ writes header size
+ writes width and height
+ writes number of color planes (1)
+ writes bits per pixel
+ writes compression (none = 0)
+ writes size of pixel data
+ writes resolution values (here zero)
+ writes number of colors in palette (256)
+ writes zero for important colors
+palette
+ 256 entries
+ each entry = blue, green, red, zero
+ all three colors same number → gray
+ 0 = black, 255 = white
+pixel data
+ each row = numbers 0 to width
+ picture becomes left-to-right gray gradient
+ add padding bytes at end of each row
+write file
+ open file in write mode
+ write header
+ write info header
+ write palette
+ write pixel data
+ print message "file created"
+
+JPG.py
+
+purpose
+ this code takes an 8x8 block of numbers (like pixel values)
+ it calculates the DCT (discrete cosine transform)
+ then it converts the DCT result into a 1D array using zig-zag order
+ this is similar to what jpeg compression does
+block
+ the block is 8x8 numbers
+ numbers are like brightness values of pixels
+ values are from 90 to 150 here
+shift values
+ subtract 128 from all numbers
+ this centers values around 0
+ needed for DCT
+DCT
+ apply DCT on the block
+ first along columns (transpose first)
+ then along rows (transpose again)
+ norm='ortho' makes DCT normalized
+ result = 8x8 DCT coefficients
+ high numbers = low frequency
+ low numbers = high frequency
+ print rounded 8x8 DCT coefficients
+zig-zag scan
+ function zigzag_scan(matrix) converts 8x8 to 1D array
+ start top-left
+ go diagonally down and up in zig-zag pattern
+ fill all 64 values into 1D array
+ return the 1D array
+ print rounded 1D zig-zag array
+summary
+ block → subtract 128 → DCT → zig-zag → 1D array
+ this is the first step of jpeg compression
+
+
+JPG.py
+purpose
+ this code shows how chroma subsampling works in images
+ it converts an image from RGB to YCbCr
+ reduces color resolution (Cb and Cr)
+ then shows the result
+open image
+ try to open file 'my_photo.jpg'
+ if not found → print message and stop
+convert to YCbCr
+ YCbCr = color format for jpeg
+ Y = brightness (luma)
+ Cb = blue color difference
+ Cr = red color difference
+ split image into Y, Cb, Cr channels
+show original and channels
+ use matplotlib to display
+ show original RGB
+ show Y (gray)
+ show Cb (gray)
+ show Cr (gray)
+chroma subsampling
+ get original size
+ resize Cb and Cr to half width and half height
+ then resize back to original size with bilinear interpolation
+ this reduces color detail but keeps brightness detail
+merge channels and convert back
+ merge Y, reduced Cb, reduced Cr → new YCbCr image
+ convert back to RGB for display
+show result
+ use matplotlib to show original vs chroma-subsampled image
+ left = original
+ right = image with reduced color resolution (4:2:0)
+summary
+ image → YCbCr → reduce Cb/Cr → merge → RGB → display
+ this is how jpeg reduces color data to save space
+
+PNG.py
+purpose
+ this code shows two things for images:
+png optimization (making png smaller)
+png filters visualization (how sub and up filters work)
+png optimization analysis
+open 'my_logo.png'
+if file not found → print message and stop
+get original size and info of image
+print mode, metadata, and size
+stripped png
+save image again without extra metadata → 'stripped.png'
+check size → usually smaller
+indexed png
+convert image to use limited colors (quantize) → 'indexed.png'
+check size → usually smaller
+print results
+show original size, stripped size, indexed size
+show savings in bytes
+png filters visualization
+open 'my_photo.jpg' as grayscale (L mode)
+convert image to numpy array of integers
+
+
+sub filter
+for each row, subtract previous pixel in same row
+this shows horizontal differences
+up filter
+for each column, subtract previous pixel in same column
+this shows vertical differences
+show images
+use matplotlib to show three images side by side
+original
+sub filter (+128 to keep values in 0-255)
+up filter (+128)
+

@@ -1,0 +1,102 @@
+Huffman.py
+1. The Node Class
+A Node stores:
+a character
+its frequency (how many times it appears)
+pointers to its left and right child nodes
+The __lt__ method allows Python’s heapq to compare nodes by frequency.
+
+2. Huffman Encoding
+Steps inside huffman_encode(text):
+(1) Count character frequencies
+The program goes through the text and counts how many times each character appears.
+(2) Build a priority queue (heap)
+Each character becomes a node.
+ The heap always pops the least frequent nodes first.
+(3) Build the Huffman tree
+Remove the two smallest-frequency nodes.
+Combine them into a new node.
+Put the new node back into the heap.
+Repeat until one node remains → this is the root of the Huffman tree.
+(4) Generate Huffman codes
+A recursive function walks the tree:
+Going left adds "0"
+Going right adds "1"
+Each character ends up with a unique binary code.
+(5) Encode the text
+Every character in the original text is replaced with its Huffman code, creating the full encoded bit string.
+Output:
+the encoded text
+the dictionary of character codes
+the Huffman tree root
+
+3. Huffman Decoding
+Steps inside huffman_decode(encoded, root):
+Start at the root of the Huffman tree.
+Read each bit of the encoded text:
+"0" → go left
+"1" → go right
+When a leaf node (character) is reached, add that character to the decoded text.
+Reset to the root and continue.
+
+LZW.py
+
+1. LZW Compression (lzw_compress)
+What the function does:
+Create an initial dictionary
+Contains all 256 ASCII characters.
+Each character has a number (0–255).
+Scan the text
+Build the longest possible string that already exists in the dictionary.
+If the new combined string isn’t in the dictionary:
+Output the code for the current string.
+Add the new combined string to the dictionary.
+Move on.
+Add the final string’s code
+After the loop, the last piece is added to the result.
+
+Output:
+A list of integer codes that represent the compressed text.
+
+2. LZW Decompression (lzw_decompress)
+What the function does:
+Create the same starting dictionary (0–255).
+Read the first code → this starts the output.
+For every new code:
+If it exists in the dictionary:
+Use the dictionary entry.
+If it doesn’t exist yet:
+Create it using a known rule:
+ previous string + first character of previous string
+Add new entries to the dictionary as you go.
+Append decoded characters to rebuild the original text.
+Output:
+The original uncompressed text.
+
+RLE.py
+1. RLE Compression (rle_compress)
+What the function does:
+If the text is empty → return an empty string.
+It goes through the text and counts how many times a character repeats in a row.
+When the character changes, it saves:
+ character + count
+ Example: "AAA" becomes "A3".
+
+At the end, it adds the final character and its count.
+Joins everything together into one compressed string.
+
+Output:
+A string like "A3B1C5".
+
+2. RLE Decompression (rle_decompress)
+What the function does:
+Reads one character from the encoded string.
+Reads the digits after it (the count).
+Repeats the character that many times.
+ Example: "A3" → "AAA".
+Keeps doing this until the whole string is expanded.
+
+Output:
+The original uncompressed text.
+In simple words:
+ The program reads the compressed format and rebuilds the original text by repeating characters.

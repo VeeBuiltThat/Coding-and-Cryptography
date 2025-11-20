@@ -1,0 +1,108 @@
+1. Huffman Tree (Used by Hybrid Compression)
+The program includes a small Huffman coding system:
+Each pixel value or (value, count) tuple is treated as a “symbol.”
+A frequency map is built.
+A Huffman tree is constructed using a priority queue.
+Symbols that appear more often get shorter bit codes.
+Used for efficient lossless compression of RLE output.
+
+
+2. Hybrid Compression (Lossy + Lossless)
+Steps inside compress_hybrid():
+Convert the image to grayscale.
+Apply quantization → divide each pixel by quant_factor (lossy).
+Flatten the image and perform Run-Length Encoding (RLE).
+Build a Huffman dictionary based on how often each RLE pair appears.
+Convert the RLE sequence to a bitstream using the Huffman codes.
+
+Save:
+Shape of the image
+Quantization factor
+Huffman codes
+Compressed bitstream
+Decompression (decompress_hybrid()):
+Load header and Huffman codes.
+Decode the bitstream back into RLE pairs.
+Reconstruct the quantized pixel values.
+Multiply by the quantization factor (reverse quantization).
+Reshape and save the final image.
+In simple words:
+ Hybrid = quantization (lossy) + RLE (lossless) + Huffman (lossless).
+
+3. RLE v2 (Improved Binary Run-Length Encoding)
+compress_rle_v2():
+Stores image dimensions in the first 4 bytes.
+Then stores (value, count) pairs, each using 1 byte.
+If run length > 255, it splits it across multiple pairs.
+Very compact for simple images with large uniform areas.
+decompress_rle_v2():
+Reads height + width.
+Reads all (value, count) pairs.
+Reconstructs the flattened pixel array.
+Reshapes and saves the image.
+In simple words:
+ RLE v2 is a lightweight binary compressor that works best on images with big regions of the same color.
+
+4. RLE Scanline Compression (Horizontal or Vertical)
+compress_rle_scan():
+Choose scan direction:
+Horizontal (each row)
+Vertical (each column)
+For each scanline:
+Perform RLE.
+Store how many RLE pairs there are.
+Save a header containing:
+Height
+Width
+Mode (1 = horizontal, 2 = vertical)
+decompress_rle_scan():
+Reads the header.
+Rebuilds each row or column from RLE pairs.
+Reconstructs the full image.
+Main purpose:
+ Compare whether horizontal or vertical scanning compresses better.
+ Works well on patterns such as stripes or gradients.
+
+5. JPEG Quality Analysis
+jpeg_quality_analysis():
+Saves the image multiple times using different JPEG quality settings.
+
+Measures:
+File size
+Distortion (MSE – Mean Squared Error)
+Can optionally show plots:
+Quality vs File Size
+Quality vs MSE
+Rate–Distortion curve
+Goal: Understand how JPEG quality affects image size and visual quality.
+
+6. Helper Functions
+create_test_simple()
+Creates a simple synthetic image for compression testing.
+compare_rle_scan()
+Runs compression both horizontally and vertically and prints sizes.
+print_help() and main()
+Provide command-line interface support:
+hybrid compress/decompress
+rle_v2 compress/decompress
+rle_scan compress/decompress/compare
+jpeg_analysis
+In the Simplest Terms Possible
+This program includes:
+Method
+Type
+Purpose
+Hybrid
+Lossy + Lossless
+Strong compression using quantization + RLE + Huffman
+RLE v2
+Lossless
+Simple and fast binary compression
+RLE Scan
+Lossless
+Tests horizontal vs vertical compression efficiency
+JPEG Analysis
+Lossy
+Shows effect of JPEG quality settings
+
+

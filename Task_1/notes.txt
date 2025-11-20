@@ -1,0 +1,15 @@
+1. Encoding the Message 
+The encode_message function takes your 3-bit message and uses the generator matrix G to create a longer 6-bit codeword. The additional bits help later on to find and fix errors.  
+Think of it like this:  
+message → add protection bits → codeword
+
+2. Introducing an Error 
+The introduce_error function changes one random bit in the codeword. This simulates a real error that might happen when sending the message.
+
+3. Detecting the Error
+The calculate_syndrome function uses the parity-check matrix H. If the received codeword has no errors, the syndrome will show all zeros. If the syndrome has any non-zero values, it means there is an error.
+
+4. Correcting the Error
+The correct_error function looks at the syndrome and compares it to the columns of H. Each column shows what the syndrome looks like for an error in a specific bit position. If the syndrome matches a column, we know which bit is wrong and can fix it by flipping it back.  
+After correcting the codeword, the program checks if it matches the original codeword. If it does, the program has successfully fixed the error.
+

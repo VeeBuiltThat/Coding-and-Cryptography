@@ -1,0 +1,16 @@
+1. Encrypting and Decrypting a Message (ECB Mode)  
+The user enters a message. A random 8-byte DES key is created. The program adds padding to the message so its length matches a multiple of 8 bytes (a requirement for DES). The program encrypts the message using ECB mode. It displays the encrypted bytes. The same key is then used to decrypt the message. The program removes the padding, showing the original message again.
+
+2. Encrypting Several Example Messages  
+The program defines some short messages, like "A" or "Hello." Each message is padded because DES only works with 8-byte blocks. All padded messages are adjusted to be either 8 or 16 bytes long. Each padded message is encrypted with the same DES key. The program prints out: the original message, the padded version, and the encrypted version.
+
+3. Using DES in CBC Mode  
+A new DES key and a random initialization vector (IV) are created. The program pads the message and encrypts it using CBC mode. In CBC mode, each block depends on the previous block and the IV, which is different from ECB. The program displays the encrypted bytes. It then decrypts the text using the same key and IV.
+
+4. Brute-Forcing a Weak DES Key  
+A plaintext block (TEST1234) is defined. The DES key mostly consists of zeros except for the last byte. The program encrypts the plaintext once with the real key. Then, it tests all 256 possibilities for the last key byte. For each guess, it decrypts the ciphertext. If the result matches the known plaintext, it finds the correct key.
+
+5. Encrypting and Decrypting a File  
+The program reads data from example.txt. It randomly creates a DES key. The program adds padding to the file content. It encrypts the padded content and saves it as example.txt.enc. Then, the program reads the encrypted file again. It decrypts and removes the padding. Finally, it writes the original content to example_decrypted.txt.
+
+

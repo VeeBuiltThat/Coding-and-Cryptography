@@ -1,0 +1,19 @@
+1. Generating and Saving a Key
+A new Fernet key is created using Fernet.generate_key().
+The key is saved into a file called mykey.key.
+This key is required for both encryption and decryption.
+
+2. Encrypting a File
+The program loads the key from mykey.key.
+It opens a file called my_details.txt and reads its original contents.
+Using the Fernet key, the contents are encrypted.
+The encrypted data is written back into my_details.txt, replacing the original text.
+
+3. Decrypting the File
+The program loads the same key from mykey.key.
+It opens my_details.txt, which now contains encrypted data.
+The data is decrypted back to its original form.
+The decrypted data is saved back into my_details.txt.
+
+
+
