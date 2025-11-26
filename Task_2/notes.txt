@@ -11,6 +11,10 @@ A new DES key and a random initialization vector (IV) are created. The program p
 A plaintext block (TEST1234) is defined. The DES key mostly consists of zeros except for the last byte. The program encrypts the plaintext once with the real key. Then, it tests all 256 possibilities for the last key byte. For each guess, it decrypts the ciphertext. If the result matches the known plaintext, it finds the correct key.
 
 5. Encrypting and Decrypting a File  
-The program reads data from example.txt. It randomly creates a DES key. The program adds padding to the file content. It encrypts the padded content and saves it as example.txt.enc. Then, the program reads the encrypted file again. It decrypts and removes the padding. Finally, it writes the original content to example_decrypted.txt.
+It randomly creates a DES key. The program adds padding to the file content. It encrypts the padded content and saves it as example.txt.enc. Then, the program reads the encrypted file again. It decrypts and removes the padding. Finally, it writes the original content to example_decrypted.txt.
 
 
+Random meanings, that I need to remember myself
+- DES (Data Encryption Standard)
+- CBC (Cipher Block Chaining)
+- IV (Initialization vector)

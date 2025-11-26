@@ -1,7 +1,7 @@
 from PIL import Image, ImageDraw
 from random import randint
 
-def stega_encrypt():
+def stega_encrypt(): # it reads, parses coordinates through regex, maybe then it reconstructs the message
     keys = []
     img_path = input("path to image: ").strip()
     img = Image.open(img_path).convert("RGB")

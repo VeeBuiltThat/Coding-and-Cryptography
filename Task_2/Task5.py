@@ -1,9 +1,11 @@
+# Encrypting and decrypting a file
+
 from Crypto.Cipher import DES
 from Crypto.Util.Padding import pad, unpad
 from Crypto.Random import get_random_bytes
 
 
-key = get_random_bytes(8)
+key = get_random_bytes(8) # self explanotary, random bytes
 cipher = DES.new(key, DES.MODE_ECB)
 
 with open("example.txt", "rb") as f:
@@ -13,7 +15,7 @@ padded = pad(data, DES.block_size)
 encrypted = cipher.encrypt(padded)
 
 with open("example.txt.enc", "wb") as f:
-    f.write(encrypted)
+    f.write(encrypted) # basically saves the files as example.txt.enc, thats it lol
 
 print("File encrypted → example.txt.enc")
 

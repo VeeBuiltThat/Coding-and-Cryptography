@@ -1,5 +1,6 @@
 import heapq
 
+# frequencies
 class Node:
     def __init__(self, char, freq):
         self.char = char
@@ -18,6 +19,7 @@ def huffman_encode(text):
     for char in text:
         freq[char] = freq.get(char, 0) + 1
 
+# priority queue thing, or whatever it was called
     heap = [Node(char, freq[char]) for char in freq]
     heapq.heapify(heap)
 
@@ -38,6 +40,7 @@ def huffman_encode(text):
             return
         generate_codes(node.left, current_code + "0")
         generate_codes(node.right, current_code + "1")
+        # basically, it got the flavor in each binary code
 
     generate_codes(root, "")
 
@@ -60,3 +63,12 @@ def huffman_decode(encoded, root):
             node = root
 
     return decoded
+
+if __name__ == "__main__":
+    s = "this is an example for huffman encoding"
+    encoded, codes, root = huffman_encode(s)
+    decoded = huffman_decode(encoded, root)
+    print("Original:", s)
+    print("Encoded:", encoded)
+    print("Codes:", codes)
+    print("Decoded:", decoded)

@@ -1,11 +1,9 @@
+# Task 1: Encoding a Message Using G
+
 import numpy as np
 import random
 
-# Task 1: Encoding a Message Using G
 def encode_message(message, G):
-    """
-    Encodes a message using the generator matrix G.
-    """
     codeword = np.matmul(message, G) % 2
     return codeword
 
@@ -24,9 +22,6 @@ print("Encoded Codeword:", codeword)
 
 
 def introduce_error(codeword, error_position):
-    """
-    Flips one bit at error_position to simulate transmission errors.
-    """
     received_codeword = codeword.copy()
     received_codeword[error_position] = 1 - received_codeword[error_position] 
     return received_codeword
@@ -39,9 +34,7 @@ print(f"Received Codeword with Error at position {error_position}:", received_co
 
 
 def calculate_syndrome(received_codeword, H):
-    """
-    Calculates the syndrome using the parity check matrix H.
-    """
+    
     syndrome = np.matmul(H, received_codeword) % 2
     error_detected = not np.array_equal(syndrome, np.zeros(H.shape[0]))
     return syndrome, error_detected
@@ -59,10 +52,7 @@ print("Error Detected:", error_detected)
 
 
 def correct_error(received_codeword, syndrome, H):
-    """
-    Identifies and corrects a single-bit error using the syndrome.
-    """
-
+ 
     for bit_pos in range(H.shape[1]):
         if np.array_equal(syndrome, H[:, bit_pos]):
             corrected = received_codeword.copy()

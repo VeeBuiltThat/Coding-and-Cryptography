@@ -1,7 +1,9 @@
+# Redchannel keys as printed tuple strings
+
 from PIL import Image
 from re import findall
 
-def stega_decrypt():
+def stega_decrypt(): # adds character code in redchannel of random chosen pixels 
     a = []
     keys = []
     img = Image.open(input("path to image: ").strip()).convert("RGB")

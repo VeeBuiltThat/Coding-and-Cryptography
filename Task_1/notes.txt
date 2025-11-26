@@ -1,5 +1,5 @@
 1. Encoding the Message 
-The encode_message function takes your 3-bit message and uses the generator matrix G to create a longer 6-bit codeword. The additional bits help later on to find and fix errors.  
+The encode_message function takes the 3-bit message and uses the generator matrix G to create a longer 6-bit codeword. The additional bits help later on to find and fix errors.  
 Think of it like this:  
 message → add protection bits → codeword
 

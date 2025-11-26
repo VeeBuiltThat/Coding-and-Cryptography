@@ -1,4 +1,6 @@
 Huffman.py
+compression method that assigns variable-length codewords to symbols based on their frequency of occurrence
+
 1. The Node Class
 A Node stores:
 a character
@@ -40,9 +42,9 @@ When a leaf node (character) is reached, add that character to the decoded text.
 Reset to the root and continue.
 
 LZW.py
+LZW coding = lossless compression technique that removes spatial redundancies in images
 
 1. LZW Compression (lzw_compress)
-What the function does:
 Create an initial dictionary
 Contains all 256 ASCII characters.
 Each character has a number (0–255).
@@ -59,7 +61,6 @@ Output:
 A list of integer codes that represent the compressed text.
 
 2. LZW Decompression (lzw_decompress)
-What the function does:
 Create the same starting dictionary (0–255).
 Read the first code → this starts the output.
 For every new code:
@@ -74,8 +75,10 @@ Output:
 The original uncompressed text.
 
 RLE.py
+Run-lenght coding 
+
 1. RLE Compression (rle_compress)
-What the function does:
+
 If the text is empty → return an empty string.
 It goes through the text and counts how many times a character repeats in a row.
 When the character changes, it saves:
@@ -100,3 +103,6 @@ Output:
 The original uncompressed text.
 In simple words:
  The program reads the compressed format and rebuilds the original text by repeating characters.
+
+
+python image_compression_tools.py compress_all . hybrid

@@ -14,3 +14,4 @@ with open('my_details.txt', 'wb') as file:
     file.write(encrypted_data)
 
 print("File successfully encrypted!")
+# this the second

@@ -1,4 +1,4 @@
-BMP.py 
+BMP.py (BitMap) - REWROTE THE STRUCTURE, DIFFERENT FROM EXPLENATION
 purpose
  this code makes a bmp image file.
  the image is 256 by 256 pixels.
@@ -43,8 +43,7 @@ write file
  write pixel data
  print message "file created"
 
-JPG.py
-
+JPG_DCT.py (Joint Photographic Experts Group - Discrete Cosine Transform)
 purpose
  this code takes an 8x8 block of numbers (like pixel values)
  it calculates the DCT (discrete cosine transform)
@@ -58,7 +57,8 @@ shift values
  subtract 128 from all numbers
  this centers values around 0
  needed for DCT
-DCT
+
+DCT (Discrete Cosine Transform)
  apply DCT on the block
  first along columns (transpose first)
  then along rows (transpose again)
@@ -116,7 +116,7 @@ summary
  image → YCbCr → reduce Cb/Cr → merge → RGB → display
  this is how jpeg reduces color data to save space
 
-PNG.py
+PNG.py (Portable Network Graphics)
 purpose
  this code shows two things for images:
 png optimization (making png smaller)

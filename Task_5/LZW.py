@@ -1,6 +1,6 @@
 def lzw_compress(text):
-    dictionary = {chr(i): i for i in range(256)}
-    next_code = 256
+    dictionary = {chr(i): i for i in range(256)} # ASCII characters
+    next_code = 256 # each has that number
     current = ""
     result = []
 
@@ -38,3 +38,11 @@ def lzw_decompress(codes):
         prev = entry
 
     return result
+
+if __name__ == "__main__":
+    s = "TOBEORNOTTOBEORTOBEORNOT"
+    comp = lzw_compress(s)
+    decomp = lzw_decompress(comp)
+    print("Original:", s)
+    print("Compressed:", comp)
+    print("Decompressed:", decomp)
